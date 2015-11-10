@@ -4,8 +4,8 @@ App.Collections = {};
 App.Views = {};
 
 //Model and Collection
-App.Models.Blog = Backbone.Model.extend({
-  url:'http://tiny-starburst.herokuapp.com/collections/posts',
+App.Models.People = Backbone.Model.extend({
+  url:'http://tiny-starburst.herokuapp.com/collections/people',
   default: {
     firstName: '',
     lastName: '',
@@ -14,13 +14,13 @@ App.Models.Blog = Backbone.Model.extend({
 	},
 });
 
-App.Collections.Blog = Backbone.Collection.extend({
-  url:'http://tiny-starburst.herokuapp.com/collections/posts',
-  model: App.Models.Blog
+App.Collections.People = Backbone.Collection.extend({
+  url:'http://tiny-starburst.herokuapp.com/collections/people',
+  model: App.Models.People
 })
 
 //Views
-App.Views.Blog = Backbone.View.extend({
+App.Views.People = Backbone.View.extend({
   template: _.template($('#blogPost').html()),
 
   events: {
@@ -54,7 +54,7 @@ App.Views.Blog = Backbone.View.extend({
       alert('Not a phone number or remove dashes');
       return;
     }
-    var newPost = new App.Models.Blog({
+    var newPost = new App.Models.People({
       firstName: firstName,
       lastName: lastName,
       address: address,
@@ -83,11 +83,12 @@ App.Views.Blog = Backbone.View.extend({
 App.Router = Backbone.Router.extend({
   routes: {
     '': 'blog',
+    'blogView': 'blowView'
   },
 
   blog: function(){
-    var collection = new App.Collections.Blog();
-    var view = new App.Views.Blog({
+    var collection = new App.Collections.People();
+    var view = new App.Views.People({
       collection: collection
     });
 
